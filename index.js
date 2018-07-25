@@ -53,15 +53,12 @@ function actionRoll(msg, modifiers) {
     }, 0);
     var action = d(6, 2);
     const total = action[0] + action[1] + mods;
-    var modStr = ''
-    for (let i = 0; i < modifiers.length; i++) {
-        const e = parseInt(modifiers[i]);
-        if (!e) continue;
-        modStr += ' ' + (e < 0 ? '-' : '+') + ' ';
-        modStr += Math.abs(e);
-    }
-    var result = ''
-        + `**${total}** (**${action[0]}** & **${action[1]}**${modStr})`
+    var modStr = modifiers.reduce((s, i) => {
+        if (!e) return s;
+        return s + ' ' + (e < 0 ? '-' : '+') + ' ' + Math.abs(e);
+    });
+    var result = '' +
+        `**${total}** (**${action[0]}** & **${action[1]}**${modStr})`
 
     var success;
     if (total <= 6) success = 0;
