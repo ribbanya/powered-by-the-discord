@@ -44,18 +44,18 @@ function rInt(min, max, count = 1) {
     return Array.apply(null, Array(count)).map(n => rInt(min, max))
 }
 
-function actionRoll(msg, modifiers) {
+function actionRoll(msg, args) {
     var chan = msg.channel;
-    var mods = modifiers.reduce(function (m, s) {
-        var i = parseInt(s);
-        if (!i) return m;
-        return m + i;
+    var mods = args.reduce(function (m, s) {
+        const i = parseInt(s);
+        return m + (i ? i : 0);
     }, 0);
     var action = d(6, 2);
     const total = action[0] + action[1] + mods;
-    var modStr = modifiers.reduce((s, i) => {
-        if (!e) return s;
-        return s + ' ' + (e < 0 ? '-' : '+') + ' ' + Math.abs(e);
+    var modStr = args.reduce((s, n) => {
+        const i = parseInt(n);
+        if (!i && i !== 0) return s;
+        return s + ' ' + (i < 0 ? '-' : '+') + ' ' + Math.abs(i)
     }, '');
     var result = '' +
         `**${total}** (**${action[0]}** & **${action[1]}**${modStr})`
