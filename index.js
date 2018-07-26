@@ -56,7 +56,7 @@ function actionRoll(msg, modifiers) {
     var modStr = modifiers.reduce((s, i) => {
         if (!e) return s;
         return s + ' ' + (e < 0 ? '-' : '+') + ' ' + Math.abs(e);
-    });
+    }, '');
     var result = '' +
         `**${total}** (**${action[0]}** & **${action[1]}**${modStr})`
 
